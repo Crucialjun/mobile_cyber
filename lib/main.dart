@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_cyber/features/splash/screens/splash_screen.dart';
 import 'package:mobile_cyber/router.dart';
 
 void main() {
@@ -12,11 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Mobile Cyber',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(),
+      home: const SplashScreen(),
       onGenerateRoute: (settings) => generateRoute(settings),
     );
   }
