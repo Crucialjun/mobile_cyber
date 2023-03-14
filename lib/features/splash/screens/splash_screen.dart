@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  static const String routeName = "splash_screen";
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 2)).then((value) {
+      Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +47,7 @@ class SplashScreen extends StatelessWidget {
               const Text(
                 "Cyber",
                 textAlign: TextAlign.end,
-                style: TextStyle(fontSize: 68),
+                style: TextStyle(fontSize: 68, fontWeight: FontWeight.w500),
               ),
             ]),
       ),
