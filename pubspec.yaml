@@ -40,6 +40,7 @@ dependencies:
   smooth_page_indicator: ^1.0.1
   riverpod_lint: ^1.1.6
   hooks_riverpod: ^2.3.2
+  intl_phone_number_input: ^0.7.3+1
 
 dev_dependencies:
   flutter_test:
