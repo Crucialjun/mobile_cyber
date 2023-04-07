@@ -15,6 +15,8 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
+  PhoneNumber number = PhoneNumber(isoCode: 'KE');
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +64,11 @@ class _SignupScreenState extends State<SignupScreen> {
               height: 4,
             ),
             InternationalPhoneNumberInput(
-              autofillHints: [AutofillHints.telephoneNumber],
+              autofillHints: const [AutofillHints.telephoneNumber],
               hintText: "Enter your phone here",
               textStyle: const TextStyle(color: Colors.black),
               textAlign: TextAlign.center,
+
               onInputChanged: (PhoneNumber number) {
                 if (number.phoneNumber != null) {}
               },
@@ -74,7 +77,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
               ),
               ignoreBlank: false,
-              inputDecoration: CustomTextFieldDecoration(hintStringText: ""),
+              initialValue: number,
+              inputDecoration: const CustomTextFieldDecoration(hintStringText: ""),
               autoValidateMode: AutovalidateMode.onUserInteraction,
               cursorColor: Colors.black,
               selectorTextStyle: const TextStyle(color: Colors.black),
