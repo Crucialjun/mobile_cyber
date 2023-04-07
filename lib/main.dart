@@ -1,8 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/features/splash/screens/splash_screen.dart';
 import 'package:mobile_cyber/router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
