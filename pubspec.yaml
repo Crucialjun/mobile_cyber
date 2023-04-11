@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   json_annotation: ^4.8.0
-  flutter_svg: ^2.0.4
+  flutter_svg: ^2.0.5
   smooth_page_indicator: ^1.0.1
   riverpod_lint: ^1.1.6
   hooks_riverpod: ^2.3.2

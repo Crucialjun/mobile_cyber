@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cyber/features/common/constants.dart';
+import 'package:mobile_cyber/features/common/widgets/social_button.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -92,17 +93,33 @@ class LoginScreen extends StatelessWidget {
             const Align(
                 alignment: Alignment.center, child: Text("Or Login With")),
             const SizedBox(
-              height: 24,
+              height: 36,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                SocialButton(
+                  text: "Facebook",
+                  asset: "assets/svgs/facebook_svg.svg",
+                ),
+                SocialButton(
+                  text: "Google",
+                  asset: "assets/svgs/ic_google.svg",
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 36,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text("Already have an account"),
+                Text("Dont have an account"),
                 SizedBox(
                   width: 4,
                 ),
                 Text(
-                  "Login",
+                  "Register",
                   style: TextStyle(
                       color: appMainColor, fontWeight: FontWeight.bold),
                 )
