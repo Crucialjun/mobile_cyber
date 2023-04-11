@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
+import 'package:mobile_cyber/features/common/constants.dart';
 import 'package:mobile_cyber/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:mobile_cyber/features/onboarding/widgets/onboarding_pageview_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -59,6 +60,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   ),
                 ),
                 SmoothPageIndicator(
+                    effect: const SlideEffect(activeDotColor: appMainColor),
                     controller:
                         ref.watch(onboardingControllerProvider).controller,
                     count: _onboardingItems.length),
