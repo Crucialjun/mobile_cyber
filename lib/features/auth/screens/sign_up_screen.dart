@@ -1,66 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 import 'package:mobile_cyber/features/common/constants.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   static const String routeName = "sign_up_screen";
 
-  const SignupScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'KE');
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
-            Text(
+            const Text(
               "Register",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 36.0),
               child: Text(
                 "All your online applications available at your fingertips when and wherever you need them",
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
-            Text(
+            const Text(
               "Username",
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
-            TextField(
+            const TextField(
                 decoration:
                     CustomTextFieldDecoration(hintStringText: "username")),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
-            Text("Enter your phone number"),
-            SizedBox(
+            const Text("Enter your phone number"),
+            const SizedBox(
               height: 4,
             ),
             InternationalPhoneNumberInput(
@@ -68,7 +68,6 @@ class _SignupScreenState extends State<SignupScreen> {
               hintText: "Enter your phone here",
               textStyle: const TextStyle(color: Colors.black),
               textAlign: TextAlign.center,
-
               onInputChanged: (PhoneNumber number) {
                 if (number.phoneNumber != null) {}
               },
@@ -78,7 +77,8 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               ignoreBlank: false,
               initialValue: number,
-              inputDecoration: const CustomTextFieldDecoration(hintStringText: ""),
+              inputDecoration:
+                  const CustomTextFieldDecoration(hintStringText: ""),
               autoValidateMode: AutovalidateMode.onUserInteraction,
               cursorColor: Colors.black,
               selectorTextStyle: const TextStyle(color: Colors.black),
@@ -91,48 +91,72 @@ class _SignupScreenState extends State<SignupScreen> {
                 print('On Saved: $number');
               },
             ),
-                Text(
-                  "Email",
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                TextField(
-                    decoration:
-                    CustomTextFieldDecoration(hintStringText: "Email")),
-                Text(
-                  "Password",
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                TextField(
-                    decoration:
+            const Text(
+              "Email",
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const TextField(
+                decoration: CustomTextFieldDecoration(hintStringText: "Email")),
+            const Text(
+              "Password",
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const TextField(
+                decoration:
                     CustomTextFieldDecoration(hintStringText: "password")),
-                Text(
-                  "Confirm Password",
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                TextField(
-                    decoration:
-                    CustomTextFieldDecoration(hintStringText: "Confirm Password")),
-                SizedBox(height: 24,),
-                Container(
-                  decoration: BoxDecoration(
-                    color: appMainColor,
-                    borderRadius: BorderRadius.circular(12)
+            const Text(
+              "Confirm Password",
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const TextField(
+                decoration: CustomTextFieldDecoration(
+                    hintStringText: "Confirm Password")),
+            const SizedBox(
+              height: 24,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: appMainColor, borderRadius: BorderRadius.circular(12)),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "Register",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: const Text("Register",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white,),),
-                  ),
                 ),
-                SizedBox(height: 24,),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text("Already have an account"),SizedBox(width: 4,), Text("Login",style: TextStyle(color: appMainColor,fontWeight: FontWeight.bold),)],
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Already have an account"),
+                const SizedBox(
+                  width: 4,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(LoginScreen.routeName);
+                  },
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                        color: appMainColor, fontWeight: FontWeight.bold),
+                  ),
                 )
+              ],
+            )
           ]),
         ),
       ),

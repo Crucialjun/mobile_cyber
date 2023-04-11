@@ -32,7 +32,7 @@ class OnboardingController extends ChangeNotifier {
           duration: const Duration(milliseconds: 400), curve: Curves.easeOut);
     } else {
       Navigator.pushNamedAndRemoveUntil(
-          context, SignupScreen.routeName, (route) => false);
+          context, SignUpScreen.routeName, (route) => false);
     }
   }
 }

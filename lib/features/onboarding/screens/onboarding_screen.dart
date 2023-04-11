@@ -51,7 +51,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 InkWell(
                   onTap: () {
                     Navigator.pushNamedAndRemoveUntil(
-                        context, SignupScreen.routeName, (route) => false);
+                        context, SignUpScreen.routeName, (route) => false);
                   },
                   child: const Text(
                     "SKIP",
