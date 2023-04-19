@@ -10,6 +10,10 @@ class OnboardingController extends ChangeNotifier {
 
   List<Onboardingitem> get onboardingItems => _onboardingItems;
 
+  int _currentPage = 0;
+
+  int get currentPage => _currentPage;
+
   final PageController _controller = PageController();
 
   PageController get controller => _controller;
@@ -34,6 +38,11 @@ class OnboardingController extends ChangeNotifier {
       Navigator.pushNamedAndRemoveUntil(
           context, SignUpScreen.routeName, (route) => false);
     }
+  }
+
+  void updateCurrentPage(int currentPage){
+    _currentPage = currentPage;
+    notifyListeners();
   }
 }
 
