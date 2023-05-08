@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile_cyber/features/common/constants.dart';
+import 'package:mobile_cyber/utils/constants.dart';
 
 class SocialButton extends StatelessWidget {
   final String text;

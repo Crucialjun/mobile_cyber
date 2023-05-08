@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
-import 'package:mobile_cyber/features/common/constants.dart';
+import 'package:mobile_cyber/utils/constants.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 import 'package:mobile_cyber/utils/validators.dart';
 

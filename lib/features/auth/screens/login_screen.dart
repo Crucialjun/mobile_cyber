@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_cyber/features/common/constants.dart';
+import 'package:mobile_cyber/utils/constants.dart';
 import 'package:mobile_cyber/features/common/widgets/social_button.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../features/common/constants.dart';
+import 'constants.dart';
 
 class CustomTextFieldDecoration extends InputDecoration {
   const CustomTextFieldDecoration({required this.hintStringText});
