@@ -16,10 +16,17 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  PhoneNumber number = PhoneNumber(isoCode: 'KE');
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final PhoneNumber _defaultNumber = PhoneNumber(isoCode: 'KE');
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _phoneNumberController.dispose();
+    _usernameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextFormField(
                         validator: (value) {
-                          return userNameValidator(value);
+                          return AppValidators().userNameValidator(value);
                         },
                         decoration: const CustomTextFieldDecoration(
                             hintStringText: "username")),
@@ -82,13 +89,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                       ),
                       ignoreBlank: false,
-                      initialValue: number,
+                      initialValue: _defaultNumber,
                       inputDecoration:
                           const CustomTextFieldDecoration(hintStringText: ""),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       cursorColor: Colors.black,
                       selectorTextStyle: const TextStyle(color: Colors.black),
-                      textFieldController: phoneNumberController,
+                      textFieldController: _phoneNumberController,
                       formatInput: false,
                       keyboardType: const TextInputType.numberWithOptions(
                           signed: true, decimal: true),
@@ -100,9 +107,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const Text(
                       "Email",
                     ),
-                    const TextField(
-                        decoration:
-                            CustomTextFieldDecoration(hintStringText: "Email")),
+                    TextFormField(
+                        validator: (value) {
+                          return AppValidators().emailStringValidator(value);
+                        },
+                        decoration: const CustomTextFieldDecoration(
+                            hintStringText: "Email")),
                     SizedBox(
                       height: 14.h,
                     ),
