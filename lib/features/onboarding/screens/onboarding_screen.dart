@@ -61,7 +61,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   ),
                 ),
                 SmoothPageIndicator(
-                    effect: const SlideEffect(activeDotColor: appMainColor),
+                    effect: const SlideEffect(
+                        activeDotColor: AppColors.appMainColor),
                     controller:
                         ref.watch(onboardingControllerProvider).controller,
                     count: _onboardingItems.length),

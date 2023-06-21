@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Text(
                       "Forgot Password",
-                      style: TextStyle(color: appMainColor),
+                      style: TextStyle(color: AppColors.appMainColor),
                     ),
                   ),
                   const SizedBox(
@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: appMainColor,
+                        color: AppColors.appMainColor,
                         borderRadius: BorderRadius.circular(12)),
                     child: const Padding(
                       padding: EdgeInsets.all(16.0),
@@ -103,9 +103,9 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 36,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       SocialButton(
                         text: "Facebook",
                         asset: "assets/svgs/facebook_svg.svg",
@@ -119,9 +119,9 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 36,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text("Dont have an account"),
                       SizedBox(
                         width: 4,
@@ -129,7 +129,8 @@ class LoginScreen extends StatelessWidget {
                       Text(
                         "Register",
                         style: TextStyle(
-                            color: appMainColor, fontWeight: FontWeight.bold),
+                            color: AppColors.appMainColor,
+                            fontWeight: FontWeight.bold),
                       )
                     ],
                   )

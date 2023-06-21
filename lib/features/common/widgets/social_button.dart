@@ -15,7 +15,8 @@ class SocialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: textFieldBackground),
+          borderRadius: BorderRadius.circular(12),
+          color: AppColors.textFieldBackground),
       child: Wrap(
         children: [
           Padding(

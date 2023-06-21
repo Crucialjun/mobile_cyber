@@ -14,23 +14,24 @@ class CustomTextFieldDecoration extends InputDecoration {
   bool? get filled => true;
 
   @override
-  Color? get fillColor => textFieldBackground;
+  Color? get fillColor => AppColors.textFieldBackground;
 
   @override
   InputBorder? get enabledBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: textFieldOutline),
+        borderSide: const BorderSide(color: AppColors.textFieldBackground),
         borderRadius: BorderRadius.circular(8),
       );
 
   @override
   InputBorder? get focusedBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: textFieldOutline, width: 4),
+        borderSide:
+            const BorderSide(color: AppColors.textFieldBackground, width: 4),
         borderRadius: BorderRadius.circular(8),
       );
 
   @override
   InputBorder? get border => OutlineInputBorder(
-        borderSide: const BorderSide(color: textFieldOutline),
+        borderSide: const BorderSide(color: AppColors.textFieldBackground),
         borderRadius: BorderRadius.circular(8),
       );
 }

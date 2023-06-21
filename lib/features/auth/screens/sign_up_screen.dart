@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 import 'package:mobile_cyber/utils/constants.dart';
@@ -23,10 +24,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Form(
               key: _formKey,
               child: Column(
@@ -35,14 +37,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const Text(
+                    Text(
                       "Register",
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18.sp, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
-                      height: 12,
+                    SizedBox(
+                      height: 14.h,
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 36.0),
@@ -51,14 +53,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(
-                      height: 24,
+                    SizedBox(
+                      height: 14.h,
                     ),
                     const Text(
                       "Username",
-                    ),
-                    const SizedBox(
-                      height: 4,
                     ),
                     TextFormField(
                         validator: (value) {
@@ -66,13 +65,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                         decoration: const CustomTextFieldDecoration(
                             hintStringText: "username")),
-                    const SizedBox(
-                      height: 4,
+                    SizedBox(
+                      height: 14.h,
                     ),
                     const Text("Enter your phone number"),
-                    const SizedBox(
-                      height: 4,
-                    ),
                     InternationalPhoneNumberInput(
                       autofillHints: const [AutofillHints.telephoneNumber],
                       hintText: "Enter your phone here",
@@ -104,32 +100,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const Text(
                       "Email",
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
                     const TextField(
                         decoration:
                             CustomTextFieldDecoration(hintStringText: "Email")),
+                    SizedBox(
+                      height: 14.h,
+                    ),
                     const Text(
                       "Password",
-                    ),
-                    const SizedBox(
-                      height: 4,
                     ),
                     const TextField(
                         decoration: CustomTextFieldDecoration(
                             hintStringText: "password")),
+                    SizedBox(
+                      height: 14.h,
+                    ),
                     const Text(
                       "Confirm Password",
-                    ),
-                    const SizedBox(
-                      height: 4,
                     ),
                     const TextField(
                         decoration: CustomTextFieldDecoration(
                             hintStringText: "Confirm Password")),
-                    const SizedBox(
-                      height: 24,
+                    SizedBox(
+                      height: 14.h,
                     ),
                     InkWell(
                       onTap: () {
@@ -137,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: appMainColor,
+                            color: AppColors.appMainColor,
                             borderRadius: BorderRadius.circular(12)),
                         child: const Padding(
                           padding: EdgeInsets.all(16.0),
@@ -152,8 +145,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 24,
+                    SizedBox(
+                      height: 14.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -170,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: const Text(
                             "Login",
                             style: TextStyle(
-                                color: appMainColor,
+                                color: AppColors.appMainColor,
                                 fontWeight: FontWeight.bold),
                           ),
                         )
