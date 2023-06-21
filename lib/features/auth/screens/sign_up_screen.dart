@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:logger/logger.dart';
+import 'package:mobile_cyber/features/auth/controllers/sign_up_controller.dart';
 import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 import 'package:mobile_cyber/utils/constants.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
@@ -18,6 +22,9 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final PhoneNumber _defaultNumber = PhoneNumber(isoCode: 'KE');
   final _formKey = GlobalKey<FormState>();
 
@@ -25,6 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     _phoneNumberController.dispose();
     _usernameController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -119,17 +128,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const Text(
                       "Password",
                     ),
-                    const TextField(
-                        decoration: CustomTextFieldDecoration(
-                            hintStringText: "password")),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        return TextField(
+                            obscureText: !ref
+                                .watch(signUpControllerProvider)
+                                .isPasswordVisible,
+                            controller: _passwordController,
+                            decoration: CustomTextFieldDecoration(
+                                endIcon: InkWell(
+                                    onTap: () {
+                                      ref
+                                          .read(signUpControllerProvider)
+                                          .togglePasswordVisibility();
+                                      Logger().d("tapped");
+                                    },
+                                    child: ref
+                                            .watch(signUpControllerProvider)
+                                            .isPasswordVisible
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off)),
+                                hintStringText: "password"));
+                      },
+                    ),
+                    SizedBox(height: 4.h),
+                    FlutterPwValidator(
+                      successColor: AppColors.appMainColor,
+                      width: 300.w,
+                      height: 50.h,
+                      minLength: 6,
+                      onSuccess: () {},
+                      controller: _passwordController,
+                    ),
                     SizedBox(
                       height: 14.h,
                     ),
                     const Text(
                       "Confirm Password",
                     ),
-                    const TextField(
-                        decoration: CustomTextFieldDecoration(
+                    TextFormField(
+                        validator: (value) {
+                          return AppValidators().confirmPasswordValidator(
+                              value: value, password: _passwordController.text);
+                        },
+                        decoration: const CustomTextFieldDecoration(
                             hintStringText: "Confirm Password")),
                     SizedBox(
                       height: 14.h,

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class CustomTextFieldDecoration extends InputDecoration {
-  const CustomTextFieldDecoration({required this.hintStringText});
+  const CustomTextFieldDecoration({required this.hintStringText, this.endIcon});
 
   final String hintStringText;
+  final Widget? endIcon;
 
   @override
   String? get hintText => hintStringText;
@@ -15,6 +16,9 @@ class CustomTextFieldDecoration extends InputDecoration {
 
   @override
   Color? get fillColor => AppColors.textFieldBackground;
+
+  @override
+  Widget? get suffixIcon => endIcon;
 
   @override
   InputBorder? get enabledBorder => OutlineInputBorder(

@@ -18,4 +18,14 @@ class AppValidators {
     }
     return null;
   }
+
+  String? confirmPasswordValidator(
+      {required String? value, required String? password}) {
+    if (value == null || value.isEmpty) {
+      return "Please enter your password";
+    } else if (value != password) {
+      return "Password does not match";
+    }
+    return null;
+  }
 }
