@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:isar/isar.dart';
+import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
+import 'package:mobile_cyber/features/common/models/user_settings.dart';
 import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "splash_screen";
@@ -14,8 +18,26 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2)).then((value) {
-      Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
+    Future.delayed(const Duration(seconds: 2)).then((value) async {
+      final dir = await getApplicationDocumentsDirectory();
+      final isarSession = await Isar.open(
+        [UserSettingsSchema],
+        directory: dir.path,
+      );
+
+      final userSettings = await isarSession.userSettings.where().findFirst();
+
+      if (userSettings == null) {
+        await isarSession.writeTxn(() async {
+          await isarSession.userSettings.put(UserSettings());
+        });
+      } else {
+        if (userSettings.isFirstTime) {
+          Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
+        } else {
+          Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+        }
+      }
     });
     super.initState();
   }
