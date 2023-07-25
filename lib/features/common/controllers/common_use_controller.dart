@@ -5,7 +5,6 @@ import 'package:path_provider/path_provider.dart';
 
 class CommonUseController {
   late Future<Isar> _isarDb;
-  UserSettings? _userSettings;
 
   CommonUseController() {
     _isarDb = init();
@@ -16,7 +15,6 @@ class CommonUseController {
     final dir = await getApplicationSupportDirectory();
     return Isar.open(
       [UserSettingsSchema],
-      inspector: true,
       directory: dir.path,
     );
   }
