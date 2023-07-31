@@ -1,42 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:isar/isar.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
-import 'package:mobile_cyber/features/common/models/user_settings.dart';
+import 'package:mobile_cyber/features/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
-import 'package:path_provider/path_provider.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = "splash_screen";
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2)).then((value) async {
-      final dir = await getApplicationDocumentsDirectory();
-      final isarSession = await Isar.open(
-        [UserSettingsSchema],
-        directory: dir.path,
-      );
+      final userSettings =
+          await ref.read(commonUseController).getUserSettings();
 
-      final userSettings = await isarSession.userSettings.where().findFirst();
-
-      if (userSettings == null) {
-        await isarSession.writeTxn(() async {
-          await isarSession.userSettings.put(UserSettings());
-        });
+      if (userSettings == null || userSettings.isFirstTime) {
+        Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
       } else {
-        if (userSettings.isFirstTime) {
-          Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
-        } else {
-          Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
-        }
+        Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
       }
     });
     super.initState();
