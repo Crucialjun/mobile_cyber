@@ -10,21 +10,22 @@ import 'package:mobile_cyber/utils/constants.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 import 'package:mobile_cyber/utils/validators.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   static const String routeName = "sign_up_screen";
 
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final PhoneNumber _defaultNumber = PhoneNumber(isoCode: 'KE');
   final _formKey = GlobalKey<FormState>();
 
@@ -117,6 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       "Email",
                     ),
                     TextFormField(
+                        controller: _emailController,
                         validator: (value) {
                           return AppValidators().emailStringValidator(value);
                         },
@@ -178,7 +180,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        if (_formKey.currentState!.validate()) {}
+                        if (_formKey.currentState!.validate()) {
+                          ref
+                              .read(signUpControllerProvider)
+                              .signUpWithEmailAndPassword(
+                                  email: _emailController.text.trim(),
+                                  password: _confirmPasswordController.text);
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
