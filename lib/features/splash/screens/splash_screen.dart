@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
+import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
+import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 
-import 'package:mobile_cyber/features/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -25,7 +25,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
       if (userSettings == null || userSettings.isFirstTime) {
         Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
       } else {
-        Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
       }
     });
     super.initState();
