@@ -3,8 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class AuthRepository {
-  final _auth = FirebaseAuth.instance;
-
   Stream authState() {
     return _auth.authStateChanges();
   }
