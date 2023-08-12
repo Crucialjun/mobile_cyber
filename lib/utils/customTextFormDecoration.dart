@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
-
 class CustomTextFieldDecoration extends InputDecoration {
   const CustomTextFieldDecoration({required this.hintStringText, this.endIcon});
 
@@ -15,27 +13,23 @@ class CustomTextFieldDecoration extends InputDecoration {
   bool? get filled => true;
 
   @override
-  Color? get fillColor => AppColors.textFieldBackground;
-
-  @override
   Widget? get suffixIcon => endIcon;
 
   @override
   InputBorder? get enabledBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.textFieldBackground),
+        borderSide: const BorderSide(),
         borderRadius: BorderRadius.circular(8),
       );
 
   @override
   InputBorder? get focusedBorder => OutlineInputBorder(
-        borderSide:
-            const BorderSide(color: AppColors.textFieldBackground, width: 4),
+        borderSide: const BorderSide(width: 4),
         borderRadius: BorderRadius.circular(8),
       );
 
   @override
   InputBorder? get border => OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.textFieldBackground),
+        borderSide: const BorderSide(),
         borderRadius: BorderRadius.circular(8),
       );
 }

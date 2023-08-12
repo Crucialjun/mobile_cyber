@@ -16,14 +16,16 @@ class OnboardingPageviewItem extends StatelessWidget {
         Text(
           item.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-              color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: size.height * 0.02),
         Text(
           item.text,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).colorScheme.onBackground),
         )
       ]),
     );

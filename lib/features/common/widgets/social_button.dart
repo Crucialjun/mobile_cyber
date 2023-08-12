@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile_cyber/utils/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SocialButton extends StatelessWidget {
   final String text;
-  final String asset;
+  final IconData icon;
   const SocialButton({
     super.key,
     required this.text,
-    required this.asset,
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: AppColors.textFieldBackground),
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Wrap(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             child: Row(
               children: [
-                SvgPicture.asset(asset, height: 36),
-                const SizedBox(
-                  width: 8,
+                Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                SizedBox(
+                  width: 8.w,
                 ),
                 Text(
                   text,

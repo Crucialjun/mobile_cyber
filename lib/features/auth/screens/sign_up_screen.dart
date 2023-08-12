@@ -6,7 +6,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:logger/logger.dart';
 import 'package:mobile_cyber/features/auth/controllers/sign_up_controller.dart';
 import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
-import 'package:mobile_cyber/utils/constants.dart';
+import 'package:mobile_cyber/utils/app_colors.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 import 'package:mobile_cyber/utils/validators.dart';
 
@@ -41,7 +41,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -89,7 +89,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     InternationalPhoneNumberInput(
                       autofillHints: const [AutofillHints.telephoneNumber],
                       hintText: "Enter your phone here",
-                      textStyle: const TextStyle(color: Colors.black),
+                      //textStyle: const TextStyle(color: Colors.black),
                       textAlign: TextAlign.center,
                       onInputChanged: (PhoneNumber number) {
                         if (number.phoneNumber != null) {}
@@ -104,7 +104,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           const CustomTextFieldDecoration(hintStringText: ""),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       cursorColor: Colors.black,
-                      selectorTextStyle: const TextStyle(color: Colors.black),
+                      //selectorTextStyle: const TextStyle(color: Colors.black),
                       textFieldController: _phoneNumberController,
                       formatInput: false,
                       keyboardType: const TextInputType.numberWithOptions(

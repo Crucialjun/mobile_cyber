@@ -1,13 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
 import 'package:mobile_cyber/services/firebase_auth/i_firebase_auth_service.dart';
 
 class FirebaseAuthService implements IFirebaseAuthService {
   final _auth = FirebaseAuth.instance;
 
   @override
-  Future<String> createUserWithEmailAndPassword(String email, String password) {
-    // TODO: implement createUserWithEmailAndPassword
-    throw UnimplementedError();
+  Future<UserCredential> createUserWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      return await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      Logger().e(e);
+      rethrow;
+    }
   }
 
   @override
@@ -42,7 +51,6 @@ class FirebaseAuthService implements IFirebaseAuthService {
 
   @override
   Stream authState() {
-    _auth.authStateChanges();
-    throw UnimplementedError();
+    return _auth.authStateChanges();
   }
 }

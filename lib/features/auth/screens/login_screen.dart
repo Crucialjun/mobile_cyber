@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_cyber/utils/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_cyber/utils/app_colors.dart';
 import 'package:mobile_cyber/features/common/widgets/social_button.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 
@@ -11,7 +12,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -64,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const TextField(
                       decoration: CustomTextFieldDecoration(
-                          hintStringText: "password")),
+                          hintStringText: "Password")),
                   const SizedBox(
                     height: 12,
                   ),
@@ -108,11 +109,11 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       SocialButton(
                         text: "Facebook",
-                        asset: "assets/svgs/facebook_svg.svg",
+                        icon: FontAwesomeIcons.facebookF,
                       ),
                       SocialButton(
                         text: "Google",
-                        asset: "assets/svgs/ic_google.svg",
+                        icon: FontAwesomeIcons.google,
                       ),
                     ],
                   ),
@@ -122,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Dont have an account"),
+                      Text("Don't have an account"),
                       SizedBox(
                         width: 4,
                       ),

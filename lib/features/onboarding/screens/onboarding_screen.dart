@@ -3,9 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
 import 'package:mobile_cyber/features/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/common/models/user_settings.dart';
-import 'package:mobile_cyber/utils/constants.dart';
 import 'package:mobile_cyber/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:mobile_cyber/features/onboarding/widgets/onboarding_pageview_item.dart';
+import 'package:mobile_cyber/utils/app_strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
@@ -27,17 +27,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(),
       body: SafeArea(
         child: Column(children: [
           Expanded(
             child: PageView.builder(
-              onPageChanged: (currentpage) {
+              onPageChanged: (currentPage) {
                 ref
                     .read(onboardingControllerProvider)
-                    .updateCurrentPage(currentpage);
-                print(currentpage);
-                print(_onboardingItems.length - 1);
+                    .updateCurrentPage(currentPage);
               },
               controller: ref.watch(onboardingControllerProvider).controller,
               scrollDirection: Axis.horizontal,
@@ -57,14 +55,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     Navigator.pushNamedAndRemoveUntil(
                         context, SignUpScreen.routeName, (route) => false);
                   },
-                  child: const Text(
-                    "SKIP",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  child: Text(
+                    AppStrings.skip.toUpperCase(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 ),
                 SmoothPageIndicator(
-                    effect: const SlideEffect(
-                        activeDotColor: AppColors.appMainColor),
+                    effect: SlideEffect(
+                        activeDotColor: Theme.of(context).primaryColor),
                     controller:
                         ref.watch(onboardingControllerProvider).controller,
                     count: _onboardingItems.length),
@@ -80,7 +79,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
-                            "Get Started",
+                            AppStrings.getStarted,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
@@ -92,11 +91,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                               .read(onboardingControllerProvider)
                               .moveNext(context);
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "NEXT",
-                            style: TextStyle(
+                            AppStrings.next.toUpperCase(),
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ),
