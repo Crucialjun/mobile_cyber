@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_cyber/common/widgets/social_button.dart';
 import 'package:mobile_cyber/utils/app_colors.dart';
-import 'package:mobile_cyber/features/common/widgets/social_button.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 
 class LoginScreen extends StatelessWidget {

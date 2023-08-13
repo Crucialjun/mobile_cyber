@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
+import 'package:mobile_cyber/common/models/user_settings.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
-import 'package:mobile_cyber/features/common/controllers/common_use_controller.dart';
-import 'package:mobile_cyber/features/common/models/user_settings.dart';
 import 'package:mobile_cyber/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:mobile_cyber/features/onboarding/widgets/onboarding_pageview_item.dart';
 import 'package:mobile_cyber/utils/app_strings.dart';

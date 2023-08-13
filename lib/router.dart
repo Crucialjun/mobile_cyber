@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_cyber/common/screens/error_screen.dart';
 import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
-import 'package:mobile_cyber/features/common/screens/error_screen.dart';
 import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
