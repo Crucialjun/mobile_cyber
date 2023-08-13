@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
-import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 
-import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
+import 'package:mobile_cyber/features/splash/presentation/controllers/splash_controller.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = "splash_screen";
@@ -18,16 +16,8 @@ class SplashScreen extends ConsumerStatefulWidget {
 class SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2)).then((value) async {
-      final userSettings =
-          await ref.read(commonUseController).getUserSettings();
+    ref.read(splashControllerProvider).init();
 
-      if (userSettings == null || userSettings.isFirstTime) {
-        Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
-      } else {
-        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-      }
-    });
     super.initState();
   }
 
