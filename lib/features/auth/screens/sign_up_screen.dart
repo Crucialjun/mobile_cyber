@@ -110,9 +110,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       keyboardType: const TextInputType.numberWithOptions(
                           signed: true, decimal: true),
                       inputBorder: const OutlineInputBorder(),
-                      onSaved: (PhoneNumber number) {
-                        print('On Saved: $number');
-                      },
+                      onSaved: (PhoneNumber number) {},
                     ),
                     const Text(
                       "Email",

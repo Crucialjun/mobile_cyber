@@ -6,10 +6,10 @@ class FirebaseAuthService implements IFirebaseAuthService {
   final _auth = FirebaseAuth.instance;
 
   @override
-  Future<UserCredential> createUserWithEmailAndPassword(
+  Future<UserCredential?> createUserWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      return await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      return await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
