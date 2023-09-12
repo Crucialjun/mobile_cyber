@@ -70,9 +70,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ref.watch(onboardingControllerProvider).currentPage ==
                         _onboardingItems.length - 1
                     ? InkWell(
-                        onTap: () {
-                          ref.read(commonUseController).saveUserSettings(
-                              UserSettings()..isFirstTime = false);
+                        onTap: () async {
+                          await ref.read(commonUseController).saveUserSettings(
+                              const UserSettings()
+                                  .copyWith(isFirstTime: false));
                           Navigator.pushNamedAndRemoveUntil(context,
                               SignUpScreen.routeName, (route) => false);
                         },

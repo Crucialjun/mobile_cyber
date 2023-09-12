@@ -1,26 +1,41 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:isar/isar.dart';
+import 'package:logger/logger.dart';
 import 'package:mobile_cyber/common/models/user_settings.dart';
 
 import 'package:path_provider/path_provider.dart';
 
 class CommonUseController {
-  Isar? _isarDb;
+  late Future<Isar> isarDb;
 
-  Future init() async {
-    final dir = await getApplicationSupportDirectory();
-    _isarDb = await Isar.open(
-      [UserSettingsSchema],
-      directory: dir.path,
-    );
+  CommonUseController() {
+    isarDb = openDb();
+  }
+
+  Future<Isar> openDb() async {
+    if (Isar.instanceNames.isEmpty) {
+      final dir = await getApplicationSupportDirectory();
+      return await Isar.open(
+        [UserSettingsSchema],
+        inspector: true,
+        directory: dir.path,
+      );
+    } else {
+      return Future.value(Isar.getInstance());
+    }
   }
 
   Future<void> saveUserSettings(UserSettings userSettings) async {
-    await _isarDb?.writeTxn(() => _isarDb!.userSettings.put(userSettings));
+    Logger().i("CommonUseController saving user settings");
+    final db = await isarDb;
+    await db.writeTxn(() async {
+      db.userSettings.put(userSettings);
+    });
   }
 
   Future<UserSettings?> getUserSettings() async {
-    return await _isarDb?.userSettings.get(1);
+    final db = await isarDb;
+    return await db.userSettings.get(1);
   }
 }
 

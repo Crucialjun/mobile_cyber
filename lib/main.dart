@@ -16,8 +16,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await setUpLocator();
-  await CommonUseController().init();
   runApp(const ProviderScope(child: MyApp()));
 }
 

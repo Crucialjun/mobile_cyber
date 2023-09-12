@@ -10,6 +10,7 @@ class SplashController {
 
   Future<void> init() async {
     await Future.delayed(const Duration(seconds: 2));
+
     final userSettings = await CommonUseController().getUserSettings();
 
     if (userSettings == null || userSettings.isFirstTime) {

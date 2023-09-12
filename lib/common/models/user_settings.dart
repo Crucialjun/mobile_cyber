@@ -4,7 +4,7 @@ import 'package:isar/isar.dart';
 
 part 'user_settings.g.dart';
 
-@Collection(inheritance: false)
+@Collection()
 class UserSettings {
   final Id id;
   final bool isFirstTime;

@@ -67,10 +67,11 @@ UserSettings _userSettingsDeserialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = UserSettings();
-  object.id = id;
-  object.isAuthenticated = reader.readBool(offsets[0]);
-  object.isFirstTime = reader.readBool(offsets[1]);
+  final object = UserSettings(
+    id: id,
+    isAuthenticated: reader.readBoolOrNull(offsets[0]) ?? false,
+    isFirstTime: reader.readBoolOrNull(offsets[1]) ?? true,
+  );
   return object;
 }
 
@@ -82,9 +83,9 @@ P _userSettingsDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 1:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? true) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -99,9 +100,7 @@ List<IsarLinkBase<dynamic>> _userSettingsGetLinks(UserSettings object) {
 }
 
 void _userSettingsAttach(
-    IsarCollection<dynamic> col, Id id, UserSettings object) {
-  object.id = id;
-}
+    IsarCollection<dynamic> col, Id id, UserSettings object) {}
 
 extension UserSettingsQueryWhereSort
     on QueryBuilder<UserSettings, UserSettings, QWhere> {
