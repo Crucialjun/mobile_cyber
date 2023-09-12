@@ -7,18 +7,20 @@ import 'package:path_provider/path_provider.dart';
 class CommonUseController {
   Isar? _isarDb;
 
-  Future<void> saveUserSettings(UserSettings userSettings) async {
-    await _isarDb!.writeTxn(() => _isarDb!.userSettings.put(userSettings));
-  }
-
-  Future<UserSettings?> getUserSettings() async {
+  Future init() async {
     final dir = await getApplicationSupportDirectory();
-    Isar isar = await Isar.open(
+    _isarDb = await Isar.open(
       [UserSettingsSchema],
       directory: dir.path,
     );
-    _isarDb = isar;
-    return await isar.userSettings.get(1);
+  }
+
+  Future<void> saveUserSettings(UserSettings userSettings) async {
+    await _isarDb?.writeTxn(() => _isarDb!.userSettings.put(userSettings));
+  }
+
+  Future<UserSettings?> getUserSettings() async {
+    return await _isarDb?.userSettings.get(1);
   }
 }
 
