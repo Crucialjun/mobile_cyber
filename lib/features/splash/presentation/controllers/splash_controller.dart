@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
-import 'package:mobile_cyber/features/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/onboarding/screens/onboarding_screen.dart';
 import 'package:mobile_cyber/locator.dart';
 import 'package:mobile_cyber/services/navigation/i_navigation_service.dart';
