@@ -167,6 +167,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       "Confirm Password",
                     ),
                     TextFormField(
+                        controller: _confirmPasswordController,
                         validator: (value) {
                           return AppValidators().confirmPasswordValidator(
                               value: value, password: _passwordController.text);
