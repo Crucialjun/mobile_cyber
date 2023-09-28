@@ -6,6 +6,7 @@ import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
 import 'package:mobile_cyber/features/onboarding/models/onboardingitem.dart';
 
 class OnboardingController extends ChangeNotifier {
+ 
   List<Onboardingitem> _onboardingItems = [];
 
   List<Onboardingitem> get onboardingItems => _onboardingItems;
@@ -40,7 +41,7 @@ class OnboardingController extends ChangeNotifier {
     }
   }
 
-  void updateCurrentPage(int currentPage){
+  void updateCurrentPage(int currentPage) {
     _currentPage = currentPage;
     notifyListeners();
   }

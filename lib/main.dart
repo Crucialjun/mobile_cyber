@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/splash/presentation/screens/splash_screen.dart';
 import 'package:mobile_cyber/firebase_options.dart';
 import 'package:mobile_cyber/locator.dart';
