@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile_cyber/features/auth/repository/auth_repository.dart';
+import 'package:mobile_cyber/features/auth/repository/i_auth_repository.dart';
+import 'package:mobile_cyber/locator.dart';
 
 class SignUpController extends ChangeNotifier {
-  final AuthRepository _authRepository;
-  bool _isPasswordVisible = false;
+  final _authRepo = locator<IAuthRepository>();
 
-  SignUpController(this._authRepository);
+  bool _isPasswordVisible = false;
 
   bool get isPasswordVisible => _isPasswordVisible;
 
@@ -17,10 +17,16 @@ class SignUpController extends ChangeNotifier {
   }
 
   Future<UserCredential?> signUpWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String username,
+      required String phoneNumber}) async {
     try {
-      return await _authRepository.signUpWithEmailAndPassword(
-          email: email, password: password);
+      return await _authRepo.signUpWithEmailAndPassword(
+          email: email,
+          password: password,
+          username: username,
+          phoneNumber: phoneNumber);
     } catch (e) {
       rethrow;
     }
@@ -28,6 +34,4 @@ class SignUpController extends ChangeNotifier {
 }
 
 final signUpControllerProvider =
-    ChangeNotifierProvider<SignUpController>((ref) => SignUpController(
-          ref.watch(authRepositoryProvider),
-        ));
+    ChangeNotifierProvider<SignUpController>((ref) => SignUpController());

@@ -184,7 +184,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               .read(signUpControllerProvider)
                               .signUpWithEmailAndPassword(
                                   email: _emailController.text.trim(),
-                                  password: _confirmPasswordController.text);
+                                  password: _confirmPasswordController.text,
+                                  username: _usernameController.text.trim(),
+                                  phoneNumber: _phoneNumberController.text);
                         }
                       },
                       child: Container(

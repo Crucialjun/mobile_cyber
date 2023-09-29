@@ -1,25 +1,43 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:mobile_cyber/common/models/app_user.dart';
+import 'package:mobile_cyber/features/auth/repository/i_auth_repository.dart';
+import 'package:mobile_cyber/services/database_service/i_database_service.dart';
 import 'package:mobile_cyber/services/firebase_auth/i_firebase_auth_service.dart';
 
 import '../../../locator.dart';
 
-class AuthRepository {
+class AuthRepository implements IAuthRepository {
   final _auth = locator<IFirebaseAuthService>();
+  final _database = locator<IDatabaseService>();
   Stream authState() {
     return _auth.authState();
   }
 
-  Future<UserCredential?> signUpWithEmailAndPassword(
-      {required String email, required String password}) async {
+  @override
+  Future<UserCredential?> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String username,
+    required String phoneNumber,
+  }) async {
     try {
-      return await _auth.createUserWithEmailAndPassword(
+      UserCredential? creds = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      AppUser user = AppUser(
+          uid: creds?.user?.uid ?? "",
+          email: email,
+          username: username,
+          photoUrl: creds?.user?.photoURL ?? "",
+          telephoneNumber: phoneNumber);
+
+      _database.addUserToDb(user);
     } catch (e) {
       Logger().e(e);
       rethrow;
     }
+    return null;
   }
 }
 
