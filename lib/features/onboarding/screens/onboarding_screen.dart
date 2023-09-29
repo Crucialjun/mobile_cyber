@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/common/models/user_settings.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
 import 'package:mobile_cyber/features/onboarding/controllers/onboarding_controller.dart';
+import 'package:mobile_cyber/features/onboarding/models/onboardingitem.dart';
 import 'package:mobile_cyber/features/onboarding/widgets/onboarding_pageview_item.dart';
 import 'package:mobile_cyber/utils/app_strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -17,7 +20,8 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  List _onboardingItems = [];
+  late Future<List> _onboardingItems;
+  List onboardingItems = [];
   @override
   void initState() {
     loadItems();
@@ -26,6 +30,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -110,9 +115,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   void loadItems() async {
-    _onboardingItems = await ref
-        .read(onboardingControllerProvider)
-        .loadOnboardingItems(context);
-    setState(() {});
+    String data = await DefaultAssetBundle.of(context)
+        .loadString("assets/jsons/onboarding_items.json");
+    final json = jsonDecode(data);
+
+    _onboardingItems = List<Onboardingitem>.from(
+        json.map((model) => Onboardingitem.fromJson(model)));
   }
 }
