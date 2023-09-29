@@ -38,9 +38,15 @@ class FirebaseAuthService implements IFirebaseAuthService {
   }
 
   @override
-  Future<String> signInWithEmailAndPassword(String email, String password) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  Future<UserCredential?> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {
+      Logger().e(e.toString());
+      rethrow;
+    }
   }
 
   @override

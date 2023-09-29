@@ -20,8 +20,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  late Future<List> _onboardingItems;
-  List onboardingItems = [];
+  List _onboardingItems = [];
   @override
   void initState() {
     loadItems();
@@ -30,7 +29,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -115,11 +113,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   void loadItems() async {
-    String data = await DefaultAssetBundle.of(context)
-        .loadString("assets/jsons/onboarding_items.json");
-    final json = jsonDecode(data);
-
-    _onboardingItems = List<Onboardingitem>.from(
-        json.map((model) => Onboardingitem.fromJson(model)));
+    _onboardingItems = await ref
+        .read(onboardingControllerProvider)
+        .loadOnboardingItems(context);
+    setState(() {});
   }
 }

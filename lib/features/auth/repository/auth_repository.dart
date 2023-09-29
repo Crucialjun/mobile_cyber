@@ -39,6 +39,18 @@ class AuthRepository implements IAuthRepository {
     }
     return null;
   }
+
+  @override
+  Future<AppUser?> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
+    var credentials = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (credentials != null) {
+      var user = await _database.getUserFromDb(credentials.user!.uid);
+      return user;
+    }
+    return null;
+  }
 }
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {

@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/common/widgets/social_button.dart';
+import 'package:mobile_cyber/features/auth/controllers/sign_in_controller.dart';
 import 'package:mobile_cyber/utils/app_colors.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = "login_screen";
   const LoginScreen({super.key});
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -51,9 +68,10 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  const TextField(
-                      decoration:
-                          CustomTextFieldDecoration(hintStringText: "Email")),
+                  TextField(
+                      controller: _emailController,
+                      decoration: const CustomTextFieldDecoration(
+                          hintStringText: "Email")),
                   const SizedBox(
                     height: 16,
                   ),
@@ -63,8 +81,10 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  const TextField(
-                      decoration: CustomTextFieldDecoration(
+                  TextField(
+                      obscureText: true,
+                      controller: _passwordController,
+                      decoration: const CustomTextFieldDecoration(
                           hintStringText: "Password")),
                   const SizedBox(
                     height: 12,
@@ -79,18 +99,27 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.appMainColor,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        "Login",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  InkWell(
+                    onTap: () {
+                      ref
+                          .read(signInControllerProvider)
+                          .signInWithEmailAndPassword(
+                              email: _emailController.text.trim(),
+                              password: _passwordController.text);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.appMainColor,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          "Login",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
