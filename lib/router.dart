@@ -22,6 +22,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 user: user,
               )));
     default:
-      return MaterialPageRoute(builder: (((context) => const ErrorScreen())));
+      return MaterialPageRoute(
+          builder: (((context) => ErrorScreen(
+                message: "${settings.name} not found",
+              ))));
   }
 }

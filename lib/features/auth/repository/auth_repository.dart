@@ -16,7 +16,7 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<UserCredential?> signUpWithEmailAndPassword({
+  Future<AppUser?> signUpWithEmailAndPassword({
     required String email,
     required String password,
     required String username,
@@ -33,11 +33,11 @@ class AuthRepository implements IAuthRepository {
           telephoneNumber: phoneNumber);
 
       _database.addUserToDb(user);
+      return user;
     } catch (e) {
       Logger().e(e);
       rethrow;
     }
-    return null;
   }
 
   @override

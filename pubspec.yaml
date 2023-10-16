@@ -54,6 +54,7 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   cloud_firestore: ^4.9.2
   extended_image: ^8.1.1
+  lottie: ^2.6.0
 
 dev_dependencies:
   flutter_test:

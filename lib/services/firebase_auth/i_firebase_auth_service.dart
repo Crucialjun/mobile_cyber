@@ -8,6 +8,6 @@ abstract class IFirebaseAuthService {
       {required String email, required String password});
   Future<void> signOut();
   Future<String> getCurrentUser();
-  Future<bool> isUserLoggedIn();
+  Future<User?> isUserLoggedIn();
   Future<void> sendPasswordResetEmail(String email);
 }

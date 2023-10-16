@@ -13,10 +13,17 @@ class FirebaseAuthService implements IFirebaseAuthService {
         email: email,
         password: password,
       );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        throw ('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        throw ('The account already exists for that email. Please Login');
+      }
     } catch (e) {
       Logger().e(e);
       rethrow;
     }
+    return null;
   }
 
   @override
@@ -26,9 +33,8 @@ class FirebaseAuthService implements IFirebaseAuthService {
   }
 
   @override
-  Future<bool> isUserLoggedIn() {
-    // TODO: implement isUserLoggedIn
-    throw UnimplementedError();
+  Future<User?> isUserLoggedIn() {
+    return Future.value(_auth.currentUser);
   }
 
   @override

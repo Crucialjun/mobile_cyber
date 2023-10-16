@@ -77,6 +77,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       "Username",
                     ),
                     TextFormField(
+                        controller: _usernameController,
                         validator: (value) {
                           return AppValidators().userNameValidator(value);
                         },
@@ -193,16 +194,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         decoration: BoxDecoration(
                             color: AppColors.appMainColor,
                             borderRadius: BorderRadius.circular(12)),
-                        child: const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text(
-                            "Register",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ref.watch(signUpControllerProvider).isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : const Text(
+                                  "Register",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
