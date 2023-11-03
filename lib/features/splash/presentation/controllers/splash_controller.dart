@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:mobile_cyber/common/controllers/common_use_controller.dart';
 import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 import 'package:mobile_cyber/features/auth/screens/sign_up_screen.dart';
@@ -28,6 +29,7 @@ class SplashController {
         if (value == null) {
           await _navigationService.pushReplacementNamed(LoginScreen.routeName);
         } else {
+          Logger().i("uid is ${value.uid}");
           final user = await dbService.getUserFromDb(value.uid);
           await _navigationService
               .pushReplacementNamed(HomePageScreen.routeName, arguments: user);

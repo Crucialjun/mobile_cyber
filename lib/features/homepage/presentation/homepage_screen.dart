@@ -55,10 +55,10 @@ class HomePageScreen extends StatelessWidget {
             SizedBox(
               height: 16.h,
             ),
-            Text(
-              "Which service would you like to request today?",
+            const Text(
+              "Which online service would you like us to help you with today?",
               textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ],
         ),
