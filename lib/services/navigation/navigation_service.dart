@@ -10,4 +10,10 @@ class NavigationService implements INavigationService {
     return await navigatorKey.currentState!
         .pushReplacementNamed(routeName, arguments: arguments);
   }
+
+  @override
+  Future pushNamed(String routeName, {Object? arguments}) {
+    return navigatorKey.currentState!
+        .pushNamed(routeName, arguments: arguments);
+  }
 }

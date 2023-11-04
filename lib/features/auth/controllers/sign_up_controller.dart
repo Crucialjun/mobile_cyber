@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/features/auth/repository/i_auth_repository.dart';
+import 'package:mobile_cyber/features/auth/screens/login_screen.dart';
 import 'package:mobile_cyber/features/homepage/presentation/homepage_screen.dart';
 
 import 'package:mobile_cyber/locator.dart';
@@ -53,6 +54,10 @@ class SignUpController extends ChangeNotifier {
   void setLoading(bool value) {
     _isLoading = value;
     notifyListeners();
+  }
+
+  void loginOptionSelected() {
+    _navigation.pushNamed(LoginScreen.routeName);
   }
 }
 

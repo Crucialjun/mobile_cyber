@@ -12,57 +12,88 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 48.h,
+          leading: ExtendedImage.network(
+            user.photoUrl,
+            width: 40.w,
+            height: 40.h,
+            fit: BoxFit.cover,
+            shape: BoxShape.circle,
+            cache: true,
+            enableMemoryCache: true,
+            loadStateChanged: (state) {
+              if (state.extendedImageLoadState == LoadState.loading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.extendedImageLoadState == LoadState.failed) {
+                return const Center(
+                  child: Icon(Icons.error),
+                );
+              }
+              return null;
+            },
+          ),
+          title: Row(
+            children: [
+              const Text("Hey, "),
+              Text(user.username == "" ? "User" : user.username,
+                  style: const TextStyle(fontWeight: FontWeight.bold))
+            ],
+          ),
+        ),
         body: SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          children: [
-            Row(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
               children: [
-                ExtendedImage.network(
-                  user.photoUrl,
-                  width: 40.w,
-                  height: 40.h,
-                  fit: BoxFit.cover,
-                  shape: BoxShape.circle,
-                  cache: true,
-                  enableMemoryCache: true,
-                  loadStateChanged: (state) {
-                    if (state.extendedImageLoadState == LoadState.loading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (state.extendedImageLoadState ==
-                        LoadState.failed) {
-                      return const Center(
-                        child: Icon(Icons.error),
-                      );
-                    }
-                    return null;
-                  },
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    const Text("Welcome,"),
-                    Text(user.username == "" ? "User" : user.username),
+                    ExtendedImage.network(
+                      user.photoUrl,
+                      width: 40.w,
+                      height: 40.h,
+                      fit: BoxFit.cover,
+                      shape: BoxShape.circle,
+                      cache: true,
+                      enableMemoryCache: true,
+                      loadStateChanged: (state) {
+                        if (state.extendedImageLoadState == LoadState.loading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state.extendedImageLoadState ==
+                            LoadState.failed) {
+                          return const Center(
+                            child: Icon(Icons.error),
+                          );
+                        }
+                        return null;
+                      },
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Welcome,"),
+                        Text(user.username == "" ? "User" : user.username),
+                      ],
+                    ),
+                    const Expanded(child: SizedBox()),
+                    const Icon(Icons.notifications)
                   ],
                 ),
-                const Expanded(child: SizedBox()),
-                const Icon(Icons.notifications)
+                SizedBox(
+                  height: 16.h,
+                ),
+                const Text(
+                  "Which online service would you like us to help you with today?",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
-            SizedBox(
-              height: 16.h,
-            ),
-            const Text(
-              "Which online service would you like us to help you with today?",
-              textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }

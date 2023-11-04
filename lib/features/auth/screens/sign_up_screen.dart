@@ -223,8 +223,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(LoginScreen.routeName);
+                            ref
+                                .read(signUpControllerProvider)
+                                .loginOptionSelected();
                           },
                           child: const Text(
                             "Login",

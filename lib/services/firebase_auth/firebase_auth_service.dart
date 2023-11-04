@@ -49,10 +49,17 @@ class FirebaseAuthService implements IFirebaseAuthService {
     try {
       return await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw ('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        throw ('Wrong password provided for that user.');
+      }
     } catch (e) {
       Logger().e(e.toString());
       rethrow;
     }
+    return null;
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_cyber/common/widgets/social_button.dart';
 import 'package:mobile_cyber/features/auth/controllers/sign_in_controller.dart';
+import 'package:mobile_cyber/utils/app_button.dart';
 import 'package:mobile_cyber/utils/app_colors.dart';
 import 'package:mobile_cyber/utils/customTextFormDecoration.dart';
 
@@ -33,138 +34,137 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Form(
-            key: formKey,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const Text(
-                    "Hello There",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 36.0),
-                    child: Text(
-                      "Sign in to access all your application and saved documents",
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Text(
+                      "Hello There",
                       textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  const Text(
-                    "Email",
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  TextField(
-                      controller: _emailController,
-                      decoration: const CustomTextFieldDecoration(
-                          hintStringText: "Email")),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    "Password",
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  TextField(
-                      obscureText: true,
-                      controller: _passwordController,
-                      decoration: const CustomTextFieldDecoration(
-                          hintStringText: "Password")),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "Forgot Password",
-                      style: TextStyle(color: AppColors.appMainColor),
+                    const SizedBox(
+                      height: 12,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      ref
-                          .read(signInControllerProvider)
-                          .signInWithEmailAndPassword(
-                              email: _emailController.text.trim(),
-                              password: _passwordController.text);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: AppColors.appMainColor,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Text(
-                          "Login",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 36.0),
+                      child: Text(
+                        "Sign in to access all your application and saved documents",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    const Text(
+                      "Email",
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    TextField(
+                        controller: _emailController,
+                        decoration: const CustomTextFieldDecoration(
+                            hintStringText: "Email")),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      "Password",
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    TextField(
+                        obscureText: true,
+                        controller: _passwordController,
+                        decoration: const CustomTextFieldDecoration(
+                            hintStringText: "Password")),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "Forgot Password",
+                        style: TextStyle(color: AppColors.appMainColor),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        ref
+                            .read(signInControllerProvider)
+                            .signInWithEmailAndPassword(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text);
+                      },
+                      child: AppButton(
+                        isLoading:
+                            ref.watch(signInControllerProvider).isLoading,
+                        label: "Login",
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Align(
+                        alignment: Alignment.center,
+                        child: Text("Or Login With")),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SocialButton(
+                          text: "Facebook",
+                          icon: FontAwesomeIcons.facebookF,
                         ),
-                      ),
+                        SocialButton(
+                          text: "Google",
+                          icon: FontAwesomeIcons.google,
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const Align(
-                      alignment: Alignment.center,
-                      child: Text("Or Login With")),
-                  const SizedBox(
-                    height: 36,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SocialButton(
-                        text: "Facebook",
-                        icon: FontAwesomeIcons.facebookF,
-                      ),
-                      SocialButton(
-                        text: "Google",
-                        icon: FontAwesomeIcons.google,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 36,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account"),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "Register",
-                        style: TextStyle(
-                            color: AppColors.appMainColor,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )
-                ]),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't have an account"),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            ref
+                                .read(signInControllerProvider)
+                                .registerOptionSelected();
+                          },
+                          child: const Text(
+                            "Register",
+                            style: TextStyle(
+                                color: AppColors.appMainColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    )
+                  ]),
+            ),
           ),
         ),
       ),
